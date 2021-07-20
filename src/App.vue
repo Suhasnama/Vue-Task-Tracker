@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <Header msg="Task Tracker"> </Header>
+    <Header @update-task="addTask" msg="Task Tracker"> </Header>
+    Task Count : {{ tasks.length }}
     <Tasks
       @toogle-reminder="toogleReminder"
       @delete-task="deleteTask"
@@ -37,6 +38,14 @@ export default {
           task = { ...task, reminder: !task.reminder };
         }
         return task;
+      });
+    },
+    addTask(task) {
+      this.tasks.push({
+        id: this.tasks.length + 1,
+        text: task.taskTitle,
+        day: task.taskTime,
+        reminder: task.taskReminder,
       });
     },
   },
@@ -76,7 +85,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 .container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;

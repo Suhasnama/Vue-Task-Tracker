@@ -1,20 +1,26 @@
 <template>
   <header>
     <h1>{{ msg }}</h1>
-    <Button color="black" text="Add task"></Button>
+    <CreateTask @update-task="updateEmit" />
   </header>
 </template>
     
 
 <script>
 import Button from "./Button.vue";
-
+import CreateTask from "./CreateTask.vue";
 export default {
   name: "Header",
   props: {
     msg: String,
   },
-  components: { Button },
+  components: { Button, CreateTask },
+  methods: {
+    updateEmit(task) {
+      this.$emit("update-task", task);
+    },
+  },
+  emits: ["update-task"],
 };
 </script>
 
